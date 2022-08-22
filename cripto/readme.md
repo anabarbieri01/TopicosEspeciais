@@ -1,0 +1,1 @@
+App oara listar criptomoedas
