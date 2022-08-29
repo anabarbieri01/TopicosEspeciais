@@ -4,8 +4,14 @@ import themes from '../themes'
 
 const CriptoItem=({coin}) => (
     <View style={styles.containerItem}>
-        <Image source={{uri: coin.image}} style={{width: 48, height: 48, marginTop: 8}} />
-        <Text>{coin.name}</Text>
+        <View style={{flexDirection:'row', justifyContent: 'space-between', padding: 8}}>
+            <Image source={{uri: coin.image}} style={{width: 48, height: 48, marginTop: 8}} />
+        </View>
+        <View style={styles.containerNomes}>
+            <Text style={styles.textoCripto}>{coin.name}</Text>
+            <Text style={styles.textoSimbolo}>{coin.symbol}</Text>
+            <Text sytle={styles.textoData}>{coin.last_updated}</Text>
+        </View>
     </View>
 )
 
@@ -18,6 +24,22 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         borderRadius: 16,
         marginTop: 16
+    },
+    containerNomes: {
+        maginLeft: 8
+    },
+    textoCripto:{
+        color: themes.colors.neutral.foreground,
+        fontWeight: 'bold'
+    },
+    textoSimbolo: {
+        color: themes.colors.utility.contrast,
+        textTransform: 'uppercase'
+    },
+    textoData: {
+        color: themes.colors.neutral.neutrall50,
+        fontSize: 11,
+        textTransform: 'lowercase'
     }
 })
 
