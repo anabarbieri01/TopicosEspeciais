@@ -1,12 +1,14 @@
 import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, StyleSheet, Image} from 'react-native'
 import themes from '../themes'
 
 const CriptoItem=({coin}) => (
     <View style={styles.containerItem}>
+        <Image source={{uri: coin.image}} style={{width: 48, height: 48, marginTop: 8}} />
         <Text>{coin.name}</Text>
     </View>
 )
+
 const styles = StyleSheet.create({
     containerItem: {
         backgroundColor: themes.colors.neutral.neutral100,

@@ -3,7 +3,7 @@ export const getCotacoes = async() => {
     try {
         const response = await fetch(urlCoin)
         const data = await response.json()
-        console.log(data)
+        console.table(data)
         return data
     }
     catch (error){
