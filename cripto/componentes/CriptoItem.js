@@ -1,6 +1,12 @@
 import React from 'react'
 import {View, Text, StyleSheet, Image} from 'react-native'
 import themes from '../themes'
+//Instalar através do comando: yarn add moment
+import moment from 'moment'
+//Definindo o idioma Português
+let idLocale = requite('moment/locale/pt-br')
+moment.updateLocale('pt-br',idLocale)
+
 
 const CriptoItem=({coin}) => (
     <View style={styles.containerItem}>
