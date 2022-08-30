@@ -23,6 +23,24 @@ const App = () => {
     carregaCotacoes()
   },[]) //quando o array vazio, executa só uma vez.
 
+  const semDados = () => {
+    return(
+      <View style={{
+        backgroundColor: themes.colors.utility.danger,
+        borderRadius: 16,
+        marginTop: 16
+      }}>
+        <Text style={{
+          color: themes.colors.neutral.foreground,
+          margin: 8,
+          fontWeight: 'bold'
+        }}> 
+          😢 Ah não! Infelizmente a cripto (busca) não existe. Refaça a busca.
+        </Text>
+      </View>
+    )
+  }
+
   return (
     <View style = {styles.container}>
       <StatusBar backgroundColor={themes.colors.brand.azul}/>
@@ -42,9 +60,14 @@ const App = () => {
       />
       <FlatList
                 style={styles.listagem}
-                data={criptos}
+                data={criptos.filter(
+                  (coin) =>
+                  coin.name.toLowerCase().includes(busca.toLocaleLowerCase()) ||
+                  coin.symbol.toLocaleLowerCase().includes(busca.toLocaleLowerCase())
+                )}
                 showsVerticalScrollIndicator={true}
                 renderItem={({item}) => <CriptoItem coin={item}/>}
+                ListEmptyComponent={semDados()}
       />          
     </View>
   )
