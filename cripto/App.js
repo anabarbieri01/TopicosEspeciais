@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {View, Text, StyleSheet, StatusBar, Image, 
         ActivityIndicator, TextInput, FlatList, Modal, Pressable} from 'react-native'
-import {getCotacoes, getGraficoCrito} from './services/criptoService'
+import {getCotacoes, getGraficoCripto} from './services/criptoService'
 import themes from './themes'
 import CriptoItem from './componentes/CriptoItem'
 //yarn add react-native-pure-chart --> instalar pelo terminal
@@ -13,10 +13,14 @@ const App = () => {
   const[busca, setBusca] = useState('')
   const[modalVisivel, setModalVisivel] = useState(false)
   const[criptoSelecionada, setCriptoSelecionada] = useState({})
+  const[dadosGraficos, setDadosGrafico] = useState([])
+  const[graficoBarra, setGraficoBarra] = useState(true) 
+
 
   const trataModal = async(moeda) => {
   //  alert(JSON.stringify(moeda))
-    const dadosGrafico = await getGraficoCrito(moeda.item.id)
+    const dadosAPI = await getGraficoCripto(moeda.item.id)
+    setDadosGrafico(dadosAPI)
     setCriptoSelecionada(moeda.item)
     setModalVisivel(true)
   }
@@ -88,11 +92,23 @@ const App = () => {
                   <Image  source={{uri: criptoSelecionada.image}}
                           style={styles.logo}/>
                   <Text> Gráfico dos últimos 15 dias da Cripto {criptoSelecionada.name}</Text>
-                    <Pressable 
-                                style={styles.botaoFecharModal}
-                                onPress={()=> setModalVisivel(!modalVisivel)}>
-                      <Text>❌ Fechar</Text>
-                    </Pressable>
+
+                  <PureChart  data={dadosGraficos} width={'100%'} height={200}
+                              type={graficoBarra ? 'bar' : 'line'}/>
+                    <View style={{flexDirection:'row'}}>
+                          
+                          <Pressable
+                            style={styles.botaoFecharModal}
+                            onPress={()=> setGraficoBarra(!graficoBarra)}>
+                            <Text>📊Mudar Gráfico</Text>
+                          </Pressable>
+
+                          <Pressable 
+                                      style={styles.botaoFecharModal}
+                                      onPress={()=> setModalVisivel(!modalVisivel)}>
+                            <Text>❌ Fechar</Text>
+                          </Pressable>
+                    </View>
                 </View>
             </View>
       </Modal>       
