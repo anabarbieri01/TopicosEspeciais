@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, StyleSheet, Image} from 'react-native'
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native'
 import themes from '../themes'
 //Instalar através do comando: yarn add moment
 import moment from 'moment'
@@ -10,7 +10,8 @@ moment.updateLocale('pt-br',idLocale)
 import {MaterialIcons} from '@expo/vector-icons'
 
 
-const CriptoItem=({coin}) => (
+const CriptoItem=({coin, onPress}) => (
+    <TouchableOpacity onPress={onPress}>
     <View style={styles.containerItem}>
         <View style={{flexDirection:'row', justifyContent: 'space-between', padding: 8}}>
             <Image source={{uri: coin.image}} style={{width: 48, height: 48, marginTop: 8}} />
@@ -48,6 +49,7 @@ const CriptoItem=({coin}) => (
                 </Text>
             </View>
     </View>
+    </TouchableOpacity>
 )
 
 const styles = StyleSheet.create({

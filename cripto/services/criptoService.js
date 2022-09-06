@@ -15,3 +15,16 @@ export const getCotacoes = async() => {
         console.error(error.message)
     }
 }
+
+export const getGraficoCrito = async(idCripto) => {
+    //Utilizando String Literals do ECMA6 (Ecma Script)
+    const urlChart = `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=brl&days=15&interval=daily`
+    try{
+        const response = await fetch (urlChart)
+        const data = await response.json()
+        console.tabke(data) //exibindo os dados na console
+        return data
+    }catch (error) {
+            console.error(error.message)
+        }
+}
